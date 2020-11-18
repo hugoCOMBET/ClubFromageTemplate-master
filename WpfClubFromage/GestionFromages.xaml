@@ -5,16 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfClubFromage"
         mc:Ignorable="d"
-        Title="Affichage des fromages" Height="450" Width="800">
+        Title="Affichage des fromages" Height="475" Width="819">
     <Grid x:Name="mainGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="71*"/>
+            <ColumnDefinition Width="9*"/>
             <ColumnDefinition Width="1"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="80*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="listFromagesView" ItemsSource="{Binding ListFromages}" SelectedItem="{Binding SelectedFromage}" IsSynchronizedWithCurrentItem="True" Grid.Column="0" />
-        <GridSplitter Grid.Column="1"/>
-        <Grid x:Name="displayFromage" Grid.Column="2">
+        <ListBox x:Name="listFromagesView" ItemsSource="{Binding ListFromages}" SelectedItem="{Binding SelectedFromage}" IsSynchronizedWithCurrentItem="True" Grid.Column="0" Background="#FFE6D5D5" Grid.ColumnSpan="2" />
+        <GridSplitter Grid.Column="2" HorizontalAlignment="Center"/>
+        <Grid x:Name="displayFromage" Grid.Column="2" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2*"/>
@@ -26,15 +27,17 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Content="Nom Fromage" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"/>
+            <Label Content="Nom Fromage" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Background="White" FontSize="14"/>
             <TextBox x:Name="nomFromage" Text="{Binding Name}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10"/>
-            <Label Content="Origine" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"/>
+            <Label Content="Origine" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Background="White" FontSize="14"/>
             <ComboBox x:Name="listOrigin" ItemsSource="{Binding ListPays, Mode=OneTime}" SelectedItem="{Binding Origin}" IsSynchronizedWithCurrentItem="True" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10"/>
-            <Label Content="Date de création" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"/>
+            <Label Content="Date de création" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Background="White" FontSize="14" Grid.ColumnSpan="2" Width="124"/>
             <DatePicker x:Name="dateCreation" SelectedDate="{Binding Creation}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10"/>
-            <Label Content="Image du fromage" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"/>
+            <Label Content="Image du fromage" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Background="White" FontSize="14" Grid.ColumnSpan="2" Width="124"/>
             <Image x:Name="imageFromage" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
-            <Button x:Name="updateFromage" Content="Mise à jour" Command="{Binding UpdateCommand}" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="10"/>
+            <Button x:Name="updateFromage" Content="Mise à jour" Command="{Binding UpdateCommand}" Grid.Row="4" Margin="158,10,10,10" Background="#FF42F725" Grid.Column="1"/>
+            <Button x:Name="AjouterFromage" Content="Ajouter" Command="{Binding AjouterFromage}" Grid.Row="4" Margin="38,10,266,10" Background="#FF42F725" Grid.ColumnSpan="2"/>
+            <Button x:Name="SupprimerFromage" Content="Supprimer" Command="{Binding SupprimerFromage}" Grid.Row="4" Margin="31,10,137,10" Background="Red" Grid.Column="1"/>
         </Grid>
     </Grid>
 </Window>

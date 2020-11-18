@@ -32,6 +32,5 @@ namespace WpfClubFromage
             mainGrid.DataContext = new viewModel.viewModelFromage(thedaopays,thedaofromage);
 
         }
-
     } 
 }

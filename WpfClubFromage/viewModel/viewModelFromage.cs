@@ -8,6 +8,7 @@ using System.Windows.Input;
 using ModelLayer.Business;
 using ModelLayer.Data;
 using WpfClubFromage.viewModel;
+using System.Windows;
 
 namespace WpfClubFromage.viewModel
 {
@@ -41,6 +42,30 @@ namespace WpfClubFromage.viewModel
                 }
             }
         }
+        public Pays Origin
+        {
+            get 
+            {
+                if (activeFromage.Origin == null)
+                {
+                    activeFromage.Origin = null;
+                    return null;
+                }
+                else
+                {
+                    return activeFromage.Origin;
+                }
+            }
+            set
+            {
+                if (activeFromage.Origin != value)
+                {
+                    activeFromage.Origin = value;
+                    OnPropertyChanged("Origin");
+                }
+            }
+        }
+
         public DateTime Creation
         {
             get => activeFromage.Creation;
@@ -49,7 +74,7 @@ namespace WpfClubFromage.viewModel
                 if (activeFromage.Creation != value)
                 {
                     activeFromage.Creation = value;
-                    //création d'un évènement si la propriété Name (bindée dans le XAML) change
+                    //création d'un évènement si la propriété Creation (bindée dans le XAML) change
                     OnPropertyChanged("Creation");
                 }
             }
@@ -85,6 +110,8 @@ namespace WpfClubFromage.viewModel
             }
         }
 
+
+
         //déclaration du contructeur de viewModelFromage
         public viewModelFromage(DaoPays thedaopays, DaoFromage thedaofromage)
         {
@@ -95,6 +122,26 @@ namespace WpfClubFromage.viewModel
             vmDaoFromage = thedaofromage;
 
             listFromage = new ObservableCollection<Fromage>(thedaofromage.SelectAll());
+
+            //foreach (Fromage F in ListFromages)
+            //{
+            //    foreach (Pays P in ListPays)
+            //    {
+            //        if (F.Origin.Name == P.Name)
+            //        {
+            //            F.Origin = P;
+            //        }
+            //    }
+            //}
+            foreach (Fromage F in ListFromages)
+            {
+                int i = 0;
+                while (F.Origin.Id != listPays[i].Id)
+                {
+                    i++;
+                }
+                F.Origin = listPays[i];
+            }
         }
 
         //Méthode appelée au click du bouton UpdateCommand
@@ -115,7 +162,19 @@ namespace WpfClubFromage.viewModel
         private void UpdateFromage()
         {
             //code du bouton - à coder
-            
+            this.vmDaoFromage.Update(this.activeFromage);
+            MessageBox.Show("Mise à jour réussi");
+        }
+
+        //private void AjouterFromage()
+        //{
+        //    listFromage.Add();
+        //}
+        private void SupprimerFromage()
+        {
+            this.vmDaoFromage.Delete(this.activeFromage);
+            listFromage.Remove(SelectedFromage);
+            MessageBox.Show("suppression réussie");
         }
     }
 }
