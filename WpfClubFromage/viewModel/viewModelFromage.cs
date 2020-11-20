@@ -92,7 +92,10 @@ namespace WpfClubFromage.viewModel
                     selectedFromage = value;
                     //création d'un évènement si la propriété Name (bindée dans le XAML) change
                     OnPropertyChanged("SelectedFromage");
-                    ActiveFromage = selectedFromage;
+                    if (selectedFromage != null)
+                    {
+                        ActiveFromage = selectedFromage;
+                    }
                 }
             }
         }
@@ -118,23 +121,10 @@ namespace WpfClubFromage.viewModel
         public viewModelFromage(DaoPays thedaopays, DaoFromage thedaofromage)
         {
             vmDaoPays = thedaopays;
-
             listPays = new ObservableCollection<Pays>(thedaopays.SelectAll());
-
             vmDaoFromage = thedaofromage;
-
             listFromage = new ObservableCollection<Fromage>(thedaofromage.SelectAll());
 
-            //foreach (Fromage F in ListFromages)
-            //{
-            //    foreach (Pays P in ListPays)
-            //    {
-            //        if (F.Origin.Name == P.Name)
-            //        {
-            //            F.Origin = P;
-            //        }
-            //    }
-            //}
             foreach (Fromage F in ListFromages)
             {
                 int i = 0;
@@ -187,21 +177,36 @@ namespace WpfClubFromage.viewModel
 
         private void UpdateFromage()
         {
-            //code du bouton - à coder
-            this.vmDaoFromage.Update(this.activeFromage);
-            MessageBox.Show("Mise à jour réussi");
+            Fromage backup = new Fromage();
+            backup = ActiveFromage;
+            this.vmDaoFromage.Update(this.ActiveFromage);
+            int a = listFromage.IndexOf(SelectedFromage);
+            listFromage.Insert(a, ActiveFromage);
+            listFromage.RemoveAt(a + 1);
+            SelectedFromage = backup;
+            MessageBox.Show("Mise à jour réussie");
         }
 
         private void AjouterFromage()
         {
+            foreach(Fromage f in listFromage)
+            {
+                int id = f.Id + 1;
+                ActiveFromage.Id = id;
+            }
             this.vmDaoFromage.Insert(this.activeFromage);
             listFromage.Add(this.activeFromage);
             MessageBox.Show("ajout réussie");
+
         }
         private void SupprimerFromage()
         {
-            this.vmDaoFromage.Delete(this.activeFromage);
-            MessageBox.Show("suppression réussie");
+            Fromage backup = new Fromage();
+            backup = ActiveFromage;
+            this.vmDaoFromage.Delete(this.ActiveFromage);
+            int a = listFromage.IndexOf(SelectedFromage);
+            listFromage.RemoveAt(a);
+            MessageBox.Show("Fromage supprimé");
         }
     }
 }

@@ -83,14 +83,12 @@ namespace ModelLayer.Data
         {
             query = "INSERT INTO " + query; // tablename (field1, field2) VALUES('value 1', 'value 2')";
             CUDQuery(query);
-
         }
 
         //Update statement
         public void Update(string query)
         {
             query = "UPDATE " + query;
-
             CUDQuery(query);
         }
 
@@ -98,7 +96,6 @@ namespace ModelLayer.Data
         public void Delete(string query)
         {
             query = "DELETE FROM " + query;
-
             CUDQuery(query);
         }
 
@@ -116,14 +113,11 @@ namespace ModelLayer.Data
             }
             return dataset;
         }
-
-
         //Select statement
         public DataTable SelectAll(string table)
         {
             string query = "SELECT * FROM " + table;
             DataSet dataset = RQuery(query);
-
             return dataset.Tables[0];
         }
 
@@ -131,7 +125,6 @@ namespace ModelLayer.Data
         {
             string query = "SELECT * FROM " + table + " where " + fieldTestCondition;
             DataSet dataset = RQuery(query);
-
             return dataset.Tables[0];
         }
 
@@ -139,7 +132,6 @@ namespace ModelLayer.Data
         {
             string query = "SELECT * FROM " + table + " where id='" + id + "'";
             DataSet dataset = RQuery(query);
-
             return dataset.Tables[0].Rows[0];
         }
     }

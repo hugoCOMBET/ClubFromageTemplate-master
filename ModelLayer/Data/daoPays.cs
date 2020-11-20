@@ -53,7 +53,6 @@ namespace ModelLayer.Data
             {
                 listPays.Add(new Pays((int)r["id"], (string)r["name"]));
             }
-
             return listPays;
         }
 
@@ -63,14 +62,12 @@ namespace ModelLayer.Data
             result = this.thedbal.SelectByField("pays", "name = '" + namePays.Replace("'","''") + "'");
             Pays foundPays = new Pays((int)result.Rows[0]["id"],(string)result.Rows[0]["name"]);
             return foundPays;
-
         }
 
         public Pays SelectById(int idPays)
         {
             DataRow result = this.thedbal.SelectById("Pays", idPays);
             return new Pays((int)result["id"], (string)result["name"]);
-
         }
     }
 }
