@@ -16,7 +16,6 @@ namespace ClubFromage
         private static DaoFromage myDaoFromage;
         private static Fromage myFromage;
 
-
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
