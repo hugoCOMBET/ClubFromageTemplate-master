@@ -18,6 +18,8 @@ namespace WpfClubFromage.viewModel
         private DaoPays vmDaoPays;
         private DaoFromage vmDaoFromage;
         private ICommand updateCommand;
+        private ICommand supprimerCommand;
+        private ICommand ajouterCommand;
         private ObservableCollection<Pays> listPays;
         private ObservableCollection<Fromage> listFromage;
         private Fromage monFromage = new Fromage(1,"Rebloch");
@@ -154,9 +156,33 @@ namespace WpfClubFromage.viewModel
                     this.updateCommand = new RelayCommand(() => UpdateFromage(), () => true);
                 }
                 return this.updateCommand;
-
             }
+        }
 
+        public ICommand AjouterCommand
+        {
+            get
+            {
+                if (this.ajouterCommand == null)
+                {
+                    this.ajouterCommand = new RelayCommand(() => AjouterFromage(), () => true);
+                }
+                return this.ajouterCommand;
+            }
+        }
+
+        //Méthode appelée au click du bouton SupprimerFromage
+
+        public ICommand SupprimerCommand
+        {
+            get
+            {
+                if (this.supprimerCommand == null)
+                {
+                    this.supprimerCommand = new RelayCommand(() => SupprimerFromage(), () => true);
+                }
+                return this.supprimerCommand;
+            }
         }
 
         private void UpdateFromage()
@@ -166,14 +192,15 @@ namespace WpfClubFromage.viewModel
             MessageBox.Show("Mise à jour réussi");
         }
 
-        //private void AjouterFromage()
-        //{
-        //    listFromage.Add();
-        //}
+        private void AjouterFromage()
+        {
+            this.vmDaoFromage.Insert(this.activeFromage);
+            listFromage.Add(this.activeFromage);
+            MessageBox.Show("ajout réussie");
+        }
         private void SupprimerFromage()
         {
             this.vmDaoFromage.Delete(this.activeFromage);
-            listFromage.Remove(SelectedFromage);
             MessageBox.Show("suppression réussie");
         }
     }

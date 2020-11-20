@@ -36,7 +36,6 @@ namespace ModelLayer.Data
                 + theFromage.Image + "')";
             this.thedbal.Insert(query);
         }
-
         public void InsertFromCSV(string filename)
         {
             using (var reader = new StreamReader(filename))
@@ -56,7 +55,6 @@ namespace ModelLayer.Data
                 }
             }
         }
-
         public void Update(Fromage myFromage)
         {
             string query = "fromage SET id = " + myFromage.Id

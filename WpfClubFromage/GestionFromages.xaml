@@ -36,8 +36,8 @@
             <Label Content="Image du fromage" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Background="White" FontSize="14" Grid.ColumnSpan="2" Width="124"/>
             <Image x:Name="imageFromage" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
             <Button x:Name="updateFromage" Content="Mise à jour" Command="{Binding UpdateCommand}" Grid.Row="4" Margin="158,10,10,10" Background="#FF42F725" Grid.Column="1"/>
-            <Button x:Name="AjouterFromage" Content="Ajouter" Command="{Binding AjouterFromage}" Grid.Row="4" Margin="38,10,266,10" Background="#FF42F725" Grid.ColumnSpan="2"/>
-            <Button x:Name="SupprimerFromage" Content="Supprimer" Command="{Binding SupprimerFromage}" Grid.Row="4" Margin="31,10,137,10" Background="Red" Grid.Column="1"/>
+            <Button x:Name="AjouterFromage" Content="Ajouter" Command="{Binding AjouterCommand}" Grid.Row="4" Margin="38,10,266,10" Background="#FF42F725" Grid.ColumnSpan="2"/>
+            <Button x:Name="SupprimerFromage" Content="Supprimer" Command="{Binding SupprimerCommand}" Grid.Row="4" Margin="31,10,137,10" Background="Red" Grid.Column="1"/>
         </Grid>
     </Grid>
 </Window>
